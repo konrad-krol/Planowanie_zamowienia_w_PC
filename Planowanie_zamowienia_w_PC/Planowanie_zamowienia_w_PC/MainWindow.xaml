@@ -5,14 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Planowanie_zamowienia_w_PC"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="560" Width="1128">
     <Grid>
-        <Grid x:Name="Ekran_Powitalny" HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="774" Visibility="Collapsed">
+        <Grid x:Name="Ekran_Powitalny" HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="1128" Visibility="Collapsed" >
             <TextBlock x:Name="Tekst_Witaj" HorizontalAlignment="Left" Height="54" Margin="119,41,0,0" TextWrapping="Wrap" Text="Witaj w programie zamówień PC!" VerticalAlignment="Top" Width="545" FontSize="36"/>
             <Button x:Name="Przycisk_Rozpocznij" Content="Rozpocznij" HorizontalAlignment="Left" Height="90" Margin="228,179,0,0" VerticalAlignment="Top" Width="328" FontSize="36" Click="Przycisk_Rozpocznij_Click"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="774">
-            <Button Content="Button" HorizontalAlignment="Left" Height="56" Margin="85,253,0,0" VerticalAlignment="Top" Width="138"/>
+        <Grid x:Name="Kategoria_Produktow" HorizontalAlignment="Left" Height="560" Margin="10,10,0,0" VerticalAlignment="Top" Width="564" Visibility="Collapsed">
+            <Button x:Name="Przycisk_Suplementy" Content="Suplementy" HorizontalAlignment="Left" Height="50" Margin="152,214,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
+            <Button x:Name="Przycisk_Urzadzenia" Content="Urządzenia" HorizontalAlignment="Left" Height="50" Margin="152,144,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
+            <Button x:Name="Przycisk_Kosmetyki" Content="Kosmetyki" HorizontalAlignment="Left" Height="50" Margin="152,74,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
+            <Button x:Name="Przycisk_Aloes" Content="Aloe Vera Line" HorizontalAlignment="Left" Height="50" Margin="152,284,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
+            <Button x:Name="Przycisk_Kolagen" Content="Kolagen" HorizontalAlignment="Left" Height="50" Margin="152,354,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
+        </Grid>
+        <Grid x:Name="Produkty_W_Koszyku" HorizontalAlignment="Left" Height="560" Margin="548,10,0,0" VerticalAlignment="Top" Width="564" Visibility="Collapsed">
+            <CheckBox x:Name="Lista_Produktow_W_Koszyku" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,120,0,0" Height="143" Width="479"/>
+            <TextBlock x:Name="Tekst_Produkty_W_Koszyku" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Produkty w koszyku" VerticalAlignment="Top" Margin="171,30,0,0" Height="37" Width="222" FontSize="24"/>
+        </Grid>
+        <Grid HorizontalAlignment="Stretch" x:Name="MappingGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" x:Name="Col1"/>
+                <ColumnDefinition Width="0.5*" x:Name="Col2"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="259*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="button" Content="+ New Mapping" Margin="10" Grid.Column="1" Command="{Binding AddMapping, UpdateSourceTrigger=PropertyChanged}"/>
+            <ListView x:Name="listView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Mappings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Call Type" x:Name="callTypeCol" Width="256">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox Margin="0" HorizontalAlignment="Stretch" x:Name="CallTypeName" ItemsSource="{Binding DBCallTypes, ElementName=userControl}" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Value"  SelectedItem="{Binding CallType.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Priority">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox HorizontalAlignment="Stretch" x:Name="PriorityName" ItemsSource="{Binding DBPriorities, ElementName=userControl}" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Value" SelectedItem="{Binding Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </Window>
