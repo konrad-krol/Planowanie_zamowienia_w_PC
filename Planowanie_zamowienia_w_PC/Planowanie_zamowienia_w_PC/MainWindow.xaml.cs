@@ -20,6 +20,7 @@ namespace Planowanie_zamowienia_w_PC
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +28,18 @@ namespace Planowanie_zamowienia_w_PC
 
         private void Przycisk_Rozpocznij_Click(object sender, RoutedEventArgs e)
         {
-
+            Wczytaj();
+            Znikanie_ekranow();
         }
+        private void Wczytaj()
+        {
+            Wczytanie_produktow.Wybor_wczytywanego_produktu();
+        }
+
+        private void Znikanie_ekranow()
+        {
+            Ekran_Powitalny.Visibility = Visibility.Collapsed;
+        }
+
     }
 }
