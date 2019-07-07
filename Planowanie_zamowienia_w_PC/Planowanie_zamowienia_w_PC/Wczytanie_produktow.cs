@@ -3,118 +3,115 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.IO;
 
 namespace Planowanie_zamowienia_w_PC
 {
     class Wczytanie_produktow
     {
-        public Dictionary<string, string> Suplementy = new Dictionary<string, string>();
-        public Dictionary<string, string> Kosmetyki = new Dictionary<string, string>();
-        public Dictionary<string, string> Urzadzenia = new Dictionary<string, string>();
-        public Dictionary<string, string> Aloes = new Dictionary<string, string>();
-        public Dictionary<string, string> Kolagen = new Dictionary<string, string>();
+        public static Dictionary<string, string> Suplementy = new Dictionary<string, string>();
+        public static Dictionary<string, string> Kosmetyki = new Dictionary<string, string>();
+        public static Dictionary<string, string> Urzadzenia = new Dictionary<string, string>();
+        public static Dictionary<string, string> Aloes = new Dictionary<string, string>();
+        public static Dictionary<string, string> Kolagen = new Dictionary<string, string>();
+        
+        private static string separator = ";";
 
-        private string separator = ";";
-
-        public void Wybor_wczytywanego_produktu(string rodzaj_wczytywanych_produktów)
+        public static void Wybor_wczytywanego_produktu()
         {
-            switch (rodzaj_wczytywanych_produktów)
-            {
-                case "suplementy":
-                    Wczytaj_suplementy();
-                    break;
-                case "kosmetyki":
-                    Wczytaj_kosmetyki();
-                    break;
-                case "urzadzenia":
-                    Wczytaj_urzadzenia();
-                    break;
-                case "aloes":
-                    Wczytaj_aloes();
-                    break;
-                case "kolagen":
-                    Wczytaj_kolagen();
-                    break;
-                default:
-                    break;
-            }
+            Wczytaj_aloes();
+            Wczytaj_kolagen();
+            Wczytaj_kosmetyki();
+            Wczytaj_suplementy();
+            Wczytaj_urzadzenia();
         }
 
-        private void Wczytaj_suplementy()
+        private static StreamReader Czyszczenie(StreamReader czyszczenie_zmiennej)
+        {
+            czyszczenie_zmiennej = null;
+            return czyszczenie_zmiennej;
+        }
+        private static void Wczytaj_suplementy()
         {
             string pobierz;
-            StreamReader file = new StreamReader(@"\Spis_produktow\WITAMINY.txt");
+            StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\WITAMINY.txt");
             while((pobierz = file.ReadLine()) != null)
             {
                 Suplementy.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator)+1));
             }
-            file = new StreamReader(@"\Spis_produktow\KOLAGEN_KAPSOLKI.txt");
+            file = Czyszczenie(file);
+            file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOLAGEN_KAPSOLKI.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Suplementy.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
-            file = new StreamReader(@"\Spis_produktow\ALOESOWY_SOK.txt");
+            file = Czyszczenie(file);
+            file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\ALOESOWY_SOK.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Suplementy.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
         }
 
-        private void Wczytaj_urzadzenia()
+        private static void Wczytaj_urzadzenia()
         {
             string pobierz;
-            StreamReader file = new StreamReader(@"\Spis_produktow\URZADZENIA.txt");
+            StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\URZADZENIA.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Urzadzenia.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
         }
 
-        private void Wczytaj_kosmetyki()
+        private static void Wczytaj_kosmetyki()
         {
             string pobierz;
-            StreamReader file = new StreamReader(@"\Spis_produktow\KOSMETYKI.txt");
+            StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOSMETYKI.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Kosmetyki.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
-            file = new StreamReader(@"\Spis_produktow\PRODUKTY_KOLAGENOWE.txt");
+            file = Czyszczenie(file);
+            file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\PRODUKTY_KOLAGENOWE.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Kosmetyki.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
-            file = new StreamReader(@"\Spis_produktow\KOLAGEN_GRAFIT_SREBRO_PLATYNA.txt");
+            file = Czyszczenie(file);
+            file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOLAGEN_GRAFIT_SREBRO_PLATYNA.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Kosmetyki.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
         }
 
-        private void Wczytaj_aloes()
+        private static void Wczytaj_aloes()
         {
             string pobierz;
-            StreamReader file = new StreamReader(@"\Spis_produktow\ALOE_VERA_LINE.txt");
+            StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\ALOE_VERA_LINE.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Aloes.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
-            file = new StreamReader(@"\Spis_produktow\ALOESOWY_SOK.txt");
+            file = Czyszczenie(file);
+            file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\ALOESOWY_SOK.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Aloes.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
         }
 
-        private void Wczytaj_kolagen()
+        private static void Wczytaj_kolagen()
         {
             string pobierz;
-            StreamReader file = new StreamReader(@"\Spis_produktow\PRODUTY_KOLAGENOWE.txt");
+            StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\PRODUKTY_KOLAGENOWE.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Kolagen.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
             }
-            file = new StreamReader(@"\Spis_produktow\KOLAGEN_GRAFIT_SREBRO_PLATYNA.txt");
+            file = Czyszczenie(file);
+            file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOLAGEN_GRAFIT_SREBRO_PLATYNA.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
                 Kolagen.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
