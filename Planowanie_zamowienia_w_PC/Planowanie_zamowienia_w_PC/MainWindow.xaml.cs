@@ -25,7 +25,6 @@ namespace Planowanie_zamowienia_w_PC
         {
             InitializeComponent();
             Lista_Produktow.ItemsSource = Produkt;
-            Resources["ListaProduktow"] = Produkt;
             Dodawanie();
         }
 
@@ -33,8 +32,8 @@ namespace Planowanie_zamowienia_w_PC
 
         public void Dodawanie()
         {
-            Produkt.Add(new A("witaminy"), new B(57.60));
-            Produkt.Add(new A("Kolagen"), new B(112));
+            Produkt.Add(new A("witaminy"), new B(57.60, null));
+            Produkt.Add(new A("Kolagen"), new B(112,22));
             
             Lista_Produktow.Items.Refresh();
         }
@@ -50,15 +49,24 @@ namespace Planowanie_zamowienia_w_PC
         public class B
         {
             public double Cena { get; set; }
-            public B(double okCena)
+            public double? Ilosc { get; set; }
+            public B(double okCena, double? okIlosc)
             {
                 Cena = okCena;
+                Ilosc = okIlosc;
             }
         }
         private void Przycisk_Rozpocznij_Click(object sender, RoutedEventArgs e)
-        {
-            Wczytaj();
-            Znikanie_ekranow();
+        { 
+            try
+            {
+                Wczytaj();
+                Znikanie_ekranow();
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void Wczytaj()
