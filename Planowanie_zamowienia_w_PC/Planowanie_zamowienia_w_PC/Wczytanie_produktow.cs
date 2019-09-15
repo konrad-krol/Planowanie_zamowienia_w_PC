@@ -26,90 +26,143 @@ namespace Planowanie_zamowienia_w_PC
             czyszczenie_zmiennej = null;
             return czyszczenie_zmiennej;
         }
+        private static void Pobieranie(ref string dane, out string nazwa, out double? cena, out double? ilosc)
+        {
+            nazwa = dane.Substring(0, dane.IndexOf(separator));
+            string reszta = dane.Substring(dane.IndexOf(separator)+1);
+            cena = Convert.ToDouble(reszta.Substring(0, reszta.IndexOf(separator)));
+            try
+            {
+                ilosc = Convert.ToDouble(reszta.Substring(reszta.IndexOf(separator)+1));
+            }
+            catch
+            {
+                ilosc = null;
+            }
+            
+        }
+        private static void Pobieranie(ref string dane, out string nazwa, out double? cena)
+        {
+            nazwa = dane.Substring(0, dane.IndexOf(separator));
+            try
+            {
+                cena = Convert.ToDouble(dane.Substring(dane.IndexOf(separator)+1));
+            }
+            catch
+            {
+                cena = null;
+            }
+        }
         private static void Wczytaj_suplementy()
         {
-            string pobierz;
+            string pobierz = "";
+            string dane = "";
+            double? cena = null;
+            double? ilosc = null;
             StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\WITAMINY.txt");
             while((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Suplementy.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator)+1));
+                Pobieranie(ref pobierz, out dane, out cena, out ilosc);
+                Bindowanie.Suplementy.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_1(cena, ilosc));
             }
-            file = Czyszczenie(file);
+            Czyszczenie(file);
             file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOLAGEN_KAPSOLKI.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Suplementy.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena, out ilosc);
+                Bindowanie.Suplementy.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_1(cena, ilosc));
             }
-            file = Czyszczenie(file);
+            Czyszczenie(file);
             file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\ALOESOWY_SOK.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Suplementy.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Suplementy.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_1(cena, null));
             }
         }
 
         private static void Wczytaj_urzadzenia()
         {
-            string pobierz;
+            string pobierz = "";
+            string dane = "";
+            double? cena = null;
             StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\URZADZENIA.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Urzadzenia.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Urzadzenia.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
         }
 
         private static void Wczytaj_kosmetyki()
         {
-            string pobierz;
+            string pobierz = "";
+            string dane = "";
+            double? cena = null;
+            double? ilosc = null;
             StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOSMETYKI.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Kosmetyki.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Kosmetyki.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
-            file = Czyszczenie(file);
+            Czyszczenie(file);
             file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\PRODUKTY_KOLAGENOWE.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Kosmetyki.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Kosmetyki.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
-            file = Czyszczenie(file);
+            Czyszczenie(file);
             file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOLAGEN_GRAFIT_SREBRO_PLATYNA.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Kosmetyki.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Kosmetyki.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
         }
 
         private static void Wczytaj_aloes()
         {
-            string pobierz;
+            string pobierz = "";
+            string dane = "";
+            double? cena = null;
+            double? ilosc = null;
             StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\ALOE_VERA_LINE.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Aloes.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Aloes.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
-            file = Czyszczenie(file);
+            Czyszczenie(file);
             file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\ALOESOWY_SOK.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Aloes.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Aloes.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
         }
 
         private static void Wczytaj_kolagen()
         {
-            string pobierz;
+            string pobierz = "";
+            string dane = "";
+            double? cena = 0;
+            double? ilosc = 0;
             StreamReader file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\PRODUKTY_KOLAGENOWE.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Kolagen.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Kolagen.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
-            file = Czyszczenie(file);
+            Czyszczenie(file);
             file = new StreamReader(@"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOLAGEN_GRAFIT_SREBRO_PLATYNA.txt");
             while ((pobierz = file.ReadLine()) != null)
             {
-                Bindowanie.Kolagen.Add(pobierz.Substring(0, pobierz.IndexOf(separator)), pobierz.Substring(pobierz.IndexOf(separator) + 1));
+                Pobieranie(ref pobierz, out dane, out cena);
+                Bindowanie.Kolagen.Add(new Bindowanie.Klucz(dane), new Bindowanie.Zawartosc_2(cena));
             }
+            Czyszczenie(file);
         }
     }
 }
