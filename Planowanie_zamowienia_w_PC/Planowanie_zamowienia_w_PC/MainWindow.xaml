@@ -39,16 +39,18 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListBox x:Name="Lista_Produktow" ItemsSource="{DynamicResource ListaProduktow}" Grid.IsSharedSizeScope="True" Grid.ColumnSpan="2" Margin="526,10,-526,-10">
+            <ListBox x:Name="Lista_Produktow" Grid.IsSharedSizeScope="True" Grid.ColumnSpan="2" Margin="526,10,-526,-10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="160" SharedSizeGroup="Nazwa" />
                                 <ColumnDefinition Width="160" SharedSizeGroup="Cena"/>
+                                <ColumnDefinition Width="160" SharedSizeGroup="Pojemność"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Key.Nazwa}" />
+                            <TextBlock Grid.Column="0" Text="{Binding Key.Nazwa}"/>
                             <TextBlock Grid.Column="1" Text="{Binding Value.Cena}"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Value.Ilosc}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
