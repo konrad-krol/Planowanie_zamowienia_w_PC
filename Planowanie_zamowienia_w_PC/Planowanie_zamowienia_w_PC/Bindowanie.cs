@@ -8,11 +8,11 @@ namespace Planowanie_zamowienia_w_PC
 {
     class Bindowanie
     {
-        public static Dictionary<Klucz, Zawartosc_1> Suplementy = new Dictionary<Klucz, Zawartosc_1>();
-        public static Dictionary<Klucz, Zawartosc_2> Kosmetyki = new Dictionary<Klucz, Zawartosc_2>();
-        public static Dictionary<Klucz, Zawartosc_2> Urzadzenia = new Dictionary<Klucz, Zawartosc_2>();
-        public static Dictionary<Klucz, Zawartosc_2> Aloes = new Dictionary<Klucz, Zawartosc_2>();
-        public static Dictionary<Klucz, Zawartosc_2> Kolagen = new Dictionary<Klucz, Zawartosc_2>();
+        public static Dictionary<Klucz, Zawartosc> Suplementy = new Dictionary<Klucz, Zawartosc>();
+        public static Dictionary<Klucz, Zawartosc> Kosmetyki = new Dictionary<Klucz, Zawartosc>();
+        public static Dictionary<Klucz, Zawartosc> Urzadzenia = new Dictionary<Klucz, Zawartosc>();
+        public static Dictionary<Klucz, Zawartosc> Aloes = new Dictionary<Klucz, Zawartosc>();
+        public static Dictionary<Klucz, Zawartosc> Kolagen = new Dictionary<Klucz, Zawartosc>();
         public class Klucz
         {
             public string Nazwa { get; set; }
@@ -21,22 +21,14 @@ namespace Planowanie_zamowienia_w_PC
                 Nazwa = okNazwa;
             }
         }
-        public class Zawartosc_1
+        public class Zawartosc
         {
-            public double? Cena { get; set; }
-            public double? Ilosc { get; set; }
-            public Zawartosc_1(double? okCena, double? okIlosc)
+            public decimal? Cena { get; set; }
+            public decimal? Ilosc { get; set; }
+            public Zawartosc(decimal? okCena, decimal? okIlosc)
             {
                 Cena = okCena;
                 Ilosc = okIlosc;
-            }
-        }
-        public class Zawartosc_2
-        {
-            public double? Cena { get; set; }
-            public Zawartosc_2(double? okCena)
-            {
-                Cena = okCena;
             }
         }
 
