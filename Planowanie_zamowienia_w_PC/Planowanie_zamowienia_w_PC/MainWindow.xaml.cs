@@ -57,21 +57,26 @@ namespace Planowanie_zamowienia_w_PC
             }
         }
         private void Przycisk_Rozpocznij_Click(object sender, RoutedEventArgs e)
-        { 
+        {
+            bool potwierdzenie = false;
             try
             {
-                Wczytaj();
-                Znikanie_ekranow();
+                Wczytaj(potwierdzenie);
             }
             catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+
+            if(potwierdzenie == true)
+            {
+                Znikanie_ekranow();
+            }
         }
 
-        private void Wczytaj()
+        private bool Wczytaj(bool potwierdzenie)
         {
-            Wczytanie_produktow.Wybor_wczytywanego_produktu();
+            return Wczytanie_produktow.Wybor_wczytywanego_produktu(potwierdzenie);
         }
 
         private void Znikanie_ekranow()
