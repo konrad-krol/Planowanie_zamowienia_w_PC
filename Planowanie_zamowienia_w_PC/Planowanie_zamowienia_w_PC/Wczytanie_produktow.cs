@@ -67,7 +67,7 @@ namespace Planowanie_zamowienia_w_PC
             string pobierz = "";
             string dane = "";
             decimal cena = 0.00M;
-            decimal? ilosc = null;
+            int? ilosc = null;
             foreach(string wybierz in sciezka)
             {
                 StreamReader file = new StreamReader(wybierz, Encoding.UTF8);
@@ -81,14 +81,14 @@ namespace Planowanie_zamowienia_w_PC
             return slownik;
             
         }
-        private static void Pobieranie(string dane, out string nazwa, out decimal cena, out decimal? ilosc)
+        private static void Pobieranie(string dane, out string nazwa, out decimal cena, out int? ilosc)
         {
             nazwa = dane.Substring(0, dane.IndexOf(separator));
             string reszta = dane.Substring(dane.IndexOf(separator)+1);
             cena = Convert.ToDecimal(reszta.Substring(0, reszta.IndexOf(separator)));
             try
             {
-                ilosc = Convert.ToDecimal(reszta.Substring(reszta.IndexOf(separator)+1));
+                ilosc = Convert.ToInt32(reszta.Substring(reszta.IndexOf(separator)+1));
             }
             catch
             {
