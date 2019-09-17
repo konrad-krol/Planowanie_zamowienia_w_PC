@@ -24,14 +24,13 @@ namespace Planowanie_zamowienia_w_PC
         public class Zawartosc
         {
             public decimal Cena { get; set; }
-            public decimal? Ilosc { get; set; }
-            public Zawartosc(decimal okCena, decimal? okIlosc)
+            public int? Ilosc { get; set; }
+            public Zawartosc(decimal okCena, int? okIlosc)
             {
                 Cena = okCena;
                 Ilosc = okIlosc;
             }
         }
-
 
     }
 }
