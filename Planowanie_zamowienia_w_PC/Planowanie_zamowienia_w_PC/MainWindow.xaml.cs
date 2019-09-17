@@ -24,44 +24,22 @@ namespace Planowanie_zamowienia_w_PC
         public MainWindow()
         {
             InitializeComponent();
-            Lista_Produktow.ItemsSource = Produkt;
-            Dodawanie();
-        }
-
-        public Dictionary<A, B> Produkt = new Dictionary<A, B>();
-
-        public void Dodawanie()
-        {
-            Produkt.Add(new A("witaminy"), new B(57.60, null));
-            Produkt.Add(new A("Kolagen"), new B(112,22));
+            Lista_Suplementy.ItemsSource = Baza_Produktow.Suplementy;
             
-            Lista_Produktow.Items.Refresh();
         }
-
-        public class A
+        private void Znikanie_ekranow()
         {
-            public string Nazwa { get; set; }
-            public A(string okNazwa)
-            {
-                Nazwa = okNazwa;
-            }
-        }
-        public class B
-        {
-            public double Cena { get; set; }
-            public double? Ilosc { get; set; }
-            public B(double okCena, double? okIlosc)
-            {
-                Cena = okCena;
-                Ilosc = okIlosc;
-            }
+            Ekran_Powitalny.Visibility = Visibility.Collapsed;
+            Ekran_Kategoria_Produktow.Visibility = Visibility.Collapsed;
+            Ekran_Kategoria_Suplementy.Visibility = Visibility.Collapsed;
+            Ekran_Produkty_W_Koszyku.Visibility = Visibility.Collapsed;
         }
         private void Przycisk_Rozpocznij_Click(object sender, RoutedEventArgs e)
         {
             bool potwierdzenie = false;
             try
             {
-                potwierdzenie = Wczytaj(potwierdzenie);
+                potwierdzenie = Wczytanie_produktow.Wybor_wczytywanego_produktu(potwierdzenie);
             }
             catch(Exception exception)
             {
@@ -74,20 +52,26 @@ namespace Planowanie_zamowienia_w_PC
             }
         }
 
-        private bool Wczytaj(bool potwierdzenie)
-        {
-            return Wczytanie_produktow.Wybor_wczytywanego_produktu(potwierdzenie);
-        }
-
-        private void Znikanie_ekranow()
-        {
-            Ekran_Powitalny.Visibility = Visibility.Collapsed;
-        }
-
         private void Przycisk_Dodaj_Do_Koszyka_Click(object sender, RoutedEventArgs e)
         {
-            Dodawanie();
-            Lista_Produktow.Items.Refresh();
+            bool potwierdzenie = false;
+            potwierdzenie = Wczytanie_produktow.Wybor_wczytywanego_produktu(potwierdzenie);
+            Lista_Suplementy.Items.Refresh();
+        }
+
+        private void Przycisk_Suplementy_Click(object sender, RoutedEventArgs e)
+        {
+            Znikanie_ekranow();
+            Ekran_Kategoria_Suplementy.Visibility = Visibility.Visible;
+            Ekran_Produkty_W_Koszyku.Visibility = Visibility.Visible;
+        }
+
+        private void Przycisk_Powrot_Do_Kategorii_Produktow_Click(object sender, RoutedEventArgs e)
+        {
+            var sample = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)Lista_Suplementy.SelectedItem;
+            string abc = sample.Key.Nazwa;
+            decimal www = sample.Value.Cena;
+            int? aaa = sample.Value.Ilosc;
         }
     }
 }
