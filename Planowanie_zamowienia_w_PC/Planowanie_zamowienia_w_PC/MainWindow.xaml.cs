@@ -61,7 +61,7 @@ namespace Planowanie_zamowienia_w_PC
             bool potwierdzenie = false;
             try
             {
-                Wczytaj(potwierdzenie);
+                potwierdzenie = Wczytaj(potwierdzenie);
             }
             catch(Exception exception)
             {
