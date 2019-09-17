@@ -5,28 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Planowanie_zamowienia_w_PC"
         mc:Ignorable="d"
-        Title="MainWindow" Height="560" Width="1128">
+        Title="MainWindow" Height="600" Width="1200">
     <Grid>
-        <Grid x:Name="Ekran_Powitalny" HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="1128" Visibility="Visible" >
-            <TextBlock x:Name="Tekst_Witaj" HorizontalAlignment="Left" Height="54" Margin="119,41,0,0" TextWrapping="Wrap" Text="Witaj w programie zamówień PC!" VerticalAlignment="Top" Width="545" FontSize="36"/>
-            <Button x:Name="Przycisk_Rozpocznij" Content="Rozpocznij" HorizontalAlignment="Left" Height="90" Margin="228,179,0,0" VerticalAlignment="Top" Width="328" FontSize="36" Click="Przycisk_Rozpocznij_Click"/>
+        <Grid x:Name="Ekran_Powitalny" HorizontalAlignment="Left" Height="510" Margin="10,10,-0.4,0" VerticalAlignment="Top" Width="1112" Visibility="Collapsed" >
+            <TextBlock x:Name="Tekst_Witaj" HorizontalAlignment="Left" Height="54" Margin="292,90,0,0" TextWrapping="Wrap" Text="Witaj w programie zamówień PC!" VerticalAlignment="Top" Width="545" FontSize="36"/>
+            <Button x:Name="Przycisk_Rozpocznij" Content="Rozpocznij" HorizontalAlignment="Left" Height="90" Margin="396,217,0,0" VerticalAlignment="Top" Width="328" FontSize="36" Click="Przycisk_Rozpocznij_Click"/>
         </Grid>
-        <Grid x:Name="Kategoria_Produktow" HorizontalAlignment="Left" Height="560" Margin="10,10,0,0" VerticalAlignment="Top" Width="564" Visibility="Collapsed">
-            <Button x:Name="Przycisk_Suplementy" Content="Suplementy" HorizontalAlignment="Left" Height="50" Margin="152,214,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
+        <Grid x:Name="Ekran_Kategoria_Produktow" HorizontalAlignment="Left" Height="560" Margin="10,10,0,0" VerticalAlignment="Top" Width="564" Visibility="Collapsed">
+            <Button x:Name="Przycisk_Suplementy" Content="Suplementy" HorizontalAlignment="Left" Height="50" Margin="152,214,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Suplementy_Click"/>
             <Button x:Name="Przycisk_Urzadzenia" Content="Urządzenia" HorizontalAlignment="Left" Height="50" Margin="152,144,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
             <Button x:Name="Przycisk_Kosmetyki" Content="Kosmetyki" HorizontalAlignment="Left" Height="50" Margin="152,74,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
             <Button x:Name="Przycisk_Aloes" Content="Aloe Vera Line" HorizontalAlignment="Left" Height="50" Margin="152,284,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
             <Button x:Name="Przycisk_Kolagen" Content="Kolagen" HorizontalAlignment="Left" Height="50" Margin="152,354,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
         </Grid>
-        <Grid x:Name="Kategoria_Suplementy" HorizontalAlignment="Left" Height="560" Margin="10,10,0,0" VerticalAlignment="Top" Width="564" Visibility="Visible">
+        <Grid x:Name="Ekran_Kategoria_Suplementy" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Visible">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="263*"/>
-                <ColumnDefinition Width="19*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Przycisk_Powrot_Do_Kategorii_Produktow" Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="78,359,0,0" VerticalAlignment="Top" Width="170" FontSize="24"/>
-            <Button x:Name="Przycisk_Dodaj_Do_Koszyka" Content="Dodaj do koszyka" HorizontalAlignment="Left" Height="50" Margin="298,359,0,0" VerticalAlignment="Top" Width="207" FontSize="24" Click="Przycisk_Dodaj_Do_Koszyka_Click"/>
-            <TextBlock x:Name="Tekst_Podaj_Ilosc" HorizontalAlignment="Left" Height="45" Margin="115,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"><Run Text="Podaj ilość:"/></TextBlock>
-            <TextBox x:Name="Pobierz_Ilosc_Produktow_Do_Koszyka" TextWrapping="Wrap" Text="1" Margin="298,286,153,229" FontSize="24"/>
+            <Button x:Name="Przycisk_Powrot_Do_Kategorii_Produktow" Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Powrot_Do_Kategorii_Produktow_Click"/>
+            <Button x:Name="Przycisk_Dodaj_Do_Koszyka" Content="Dodaj do koszyka" HorizontalAlignment="Left" Height="50" Margin="747,332,0,0" VerticalAlignment="Top" Width="207" FontSize="24" Click="Przycisk_Dodaj_Do_Koszyka_Click"/>
+            <TextBlock x:Name="Tekst_Podaj_Ilosc" HorizontalAlignment="Left" Height="45" Margin="331,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"><Run Text="Podaj ilość:"/></TextBlock>
+            <TextBox x:Name="Pobierz_Ilosc_Produktow_Do_Koszyka" TextWrapping="Wrap" Text="1" Margin="510,335,509.4,168" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
             <ListView x:Name="Lista_Produktow_Suplementy" HorizontalAlignment="Left" Height="228" VerticalAlignment="Top" Width="427" Margin="78,33,0,0" FontSize="24" Visibility="Collapsed">
                 <ListView.View>
                     <GridView AllowsColumnReorder="True">
@@ -39,12 +39,12 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListBox x:Name="Lista_Produktow" Grid.IsSharedSizeScope="True" Grid.ColumnSpan="2" Margin="526,10,-526,-10">
+            <ListBox x:Name="Lista_Produktow" Visibility="Collapsed" Grid.IsSharedSizeScope="True" Margin="10,152,9.6,191" FontSize="24">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="160" SharedSizeGroup="Nazwa" />
+                                <ColumnDefinition MinWidth="460" SharedSizeGroup="Nazwa" />
                                 <ColumnDefinition Width="160" SharedSizeGroup="Cena"/>
                                 <ColumnDefinition Width="160" SharedSizeGroup="Pojemność"/>
                             </Grid.ColumnDefinitions>
@@ -55,10 +55,21 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <TextBlock x:Name="Tekt_Kategoria_Suplementy" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Suplementy" FontSize="24" VerticalAlignment="Top" Height="38" Width="133" Margin="510,33,0,0"/>
+            <DataGrid x:Name="Lista_Suplementy" IsReadOnly="True" ItemsSource="{Binding Baza_Produktow.Suplementy}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" MinWidth="650" Margin="277,76,220.4,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nazwa produktu" Binding="{Binding Key.Nazwa}" MinWidth="450"/>
+                    <DataGridTextColumn Header="Cena" Binding="{Binding Value.Cena}" MinWidth="100" />
+                    <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Ilosc}" MinWidth="110"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock x:Name="Tekst_Wartosc_Zamowienia" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="544,469,0,0" TextWrapping="Wrap" Text="Wartość zamówienia:" VerticalAlignment="Top" Width="235"/>
+            <TextBlock x:Name="Wartosc_Zamowienia_Kwota" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="803,469,0,0" TextWrapping="Wrap" Text="0,00" VerticalAlignment="Top" MinWidth="100"/>
+            <Button x:Name="Przycisk_Idz_Do_Koszyka" Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50"/>
+
         </Grid>
-        <Grid x:Name="Produkty_W_Koszyku" HorizontalAlignment="Left" Height="560" Margin="548,10,0,0" VerticalAlignment="Top" Width="564" Visibility="Collapsed">
-            <CheckBox x:Name="Lista_Produktow_W_Koszyku" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,91,0,0" Height="143" Width="479"/>
-            <TextBlock x:Name="Tekst_Produkty_W_Koszyku" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Produkty w koszyku" VerticalAlignment="Top" Margin="171,30,0,0" Height="37" Width="222" FontSize="24"/>
+        <Grid x:Name="Ekran_Produkty_W_Koszyku" HorizontalAlignment="Left" Height="510" Margin="10,10,0,0" VerticalAlignment="Top" Width="1102" Visibility="Collapsed">
+            <TextBlock x:Name="Tekst_Produkty_W_Koszyku" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Produkty w koszyku" VerticalAlignment="Top" Margin="448,10,0,0" Height="37" Width="222" FontSize="24"/>
         </Grid>
         <Grid HorizontalAlignment="Stretch" x:Name="MappingGrid" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
