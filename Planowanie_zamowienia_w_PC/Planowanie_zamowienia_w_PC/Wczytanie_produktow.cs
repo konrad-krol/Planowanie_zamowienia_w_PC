@@ -35,22 +35,27 @@ namespace Planowanie_zamowienia_w_PC
             {
                 case "aloes":
                     string[] tablica_sciezka_aloes = { sciezka_aloe_vera_line, sciezka_aloesowy_sok };
+                    Baza_Produktow.Aloes = Baza_Produktow.Czyszczenie_Produktow(Baza_Produktow.Aloes);
                     Baza_Produktow.Aloes = Wczytaj_produkty(Baza_Produktow.Aloes, tablica_sciezka_aloes);
                     break;
                 case "kolagen":
                     string[] tablica_sciezka_kolagen = { sciezka_produkty_kolagenowe, sciezka_kolagen_grafit_srebro_platyna, };
+                    Baza_Produktow.Kolagen = Baza_Produktow.Czyszczenie_Produktow(Baza_Produktow.Kolagen);
                     Baza_Produktow.Kolagen = Wczytaj_produkty(Baza_Produktow.Kolagen, tablica_sciezka_kolagen);
                     break;
                 case "kosmetyki":
                     string[] tablica_sciezka_kosmetyki = { sciezka_kosmetyki, sciezka_produkty_kolagenowe, sciezka_kolagen_grafit_srebro_platyna };
+                    Baza_Produktow.Kosmetyki = Baza_Produktow.Czyszczenie_Produktow(Baza_Produktow.Kosmetyki);
                     Baza_Produktow.Kosmetyki = Wczytaj_produkty(Baza_Produktow.Kosmetyki, tablica_sciezka_kosmetyki);
                     break;
                 case "suplementy":
                     string[] tablica_sciezka_suplementy = { sciezka_witaminy, sciezka_kolagen_kapsolki, sciezka_aloesowy_sok };
+                    Baza_Produktow.Suplementy = Baza_Produktow.Czyszczenie_Produktow(Baza_Produktow.Suplementy);
                     Baza_Produktow.Suplementy = Wczytaj_produkty(Baza_Produktow.Suplementy, tablica_sciezka_suplementy);
                     break;
                 case "urzadzenia":
                     string[] tablica_sciezka_urzadzenia = { sciezka_urzadzenia };
+                    Baza_Produktow.Urzadzenia = Baza_Produktow.Czyszczenie_Produktow(Baza_Produktow.Urzadzenia);
                     Baza_Produktow.Urzadzenia = Wczytaj_produkty(Baza_Produktow.Urzadzenia, tablica_sciezka_urzadzenia);
                     break;
                 case "true":
@@ -76,10 +81,9 @@ namespace Planowanie_zamowienia_w_PC
                     Pobieranie(pobierz, out dane, out cena, out ilosc);      
                     slownik.Add(new Baza_Produktow.Klucz(dane), new Baza_Produktow.Zawartosc(cena, ilosc));        
                 }                
-                file = Czyszczenie(file);             
+                file = Czyszczenie_File(file);             
             }
             return slownik;
-            
         }
         private static void Pobieranie(string dane, out string nazwa, out decimal cena, out int? ilosc)
         {
@@ -95,7 +99,7 @@ namespace Planowanie_zamowienia_w_PC
                 ilosc = null;
             }
         }
-        private static StreamReader Czyszczenie(StreamReader czyszczenie_zmiennej)
+        private static StreamReader Czyszczenie_File(StreamReader czyszczenie_zmiennej)
         {
             czyszczenie_zmiennej = null;
             return czyszczenie_zmiennej;
