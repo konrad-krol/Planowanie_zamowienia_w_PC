@@ -17,12 +17,18 @@ namespace Planowanie_zamowienia_w_PC
                 Nazwa = okNazwa;
             }
         }
+
+        public static Dictionary<Klucz, Zawartosc> Czyszczenie_Koszyka(Dictionary<Klucz, Zawartosc> slownik)
+        {
+            slownik.Clear();
+            return slownik;
+        }
         public class Zawartosc
         {
             public decimal Cena { get; set; }
             public int Ilosc { get; set; }
-            public int Pojemnosc { get; set; }
-            public Zawartosc(decimal okCena, int okIlosc, int okPojemnosc)
+            public int? Pojemnosc { get; set; }
+            public Zawartosc(decimal okCena, int okIlosc, int? okPojemnosc)
             {
                 Cena = okCena;
                 Ilosc = okIlosc;
