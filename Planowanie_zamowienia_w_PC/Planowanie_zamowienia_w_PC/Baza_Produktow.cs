@@ -13,6 +13,12 @@ namespace Planowanie_zamowienia_w_PC
         public static Dictionary<Klucz, Zawartosc> Urzadzenia = new Dictionary<Klucz, Zawartosc>();
         public static Dictionary<Klucz, Zawartosc> Aloes = new Dictionary<Klucz, Zawartosc>();
         public static Dictionary<Klucz, Zawartosc> Kolagen = new Dictionary<Klucz, Zawartosc>();
+
+        public static Dictionary<Klucz, Zawartosc> Czyszczenie_Produktow(Dictionary<Klucz, Zawartosc> slownik)
+        {
+            slownik.Clear();
+            return slownik;
+        }
         public class Klucz
         {
             public string Nazwa { get; set; }
