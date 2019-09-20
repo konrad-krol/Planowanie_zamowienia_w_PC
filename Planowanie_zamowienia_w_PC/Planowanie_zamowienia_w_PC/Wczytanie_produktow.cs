@@ -72,16 +72,17 @@ namespace Planowanie_zamowienia_w_PC
             string pobierz = "";
             string dane = "";
             decimal cena = 0.00M;
-            int? ilosc = null;
+            int? pojemnosc = null;
             foreach(string wybierz in sciezka)
             {
                 StreamReader file = new StreamReader(wybierz, Encoding.UTF8);
                 while ((pobierz = file.ReadLine()) != null)
                 {
-                    Pobieranie(pobierz, out dane, out cena, out ilosc);      
-                    slownik.Add(new Baza_Produktow.Klucz(dane), new Baza_Produktow.Zawartosc(cena, ilosc));        
-                }                
-                file = Czyszczenie_File(file);             
+                    Pobieranie(pobierz, out dane, out cena, out pojemnosc);      
+                    slownik.Add(new Baza_Produktow.Klucz(dane), new Baza_Produktow.Zawartosc(cena, pojemnosc));        
+                }
+                file.Close();
+                file = null;
             }
             return slownik;
         }
@@ -89,20 +90,15 @@ namespace Planowanie_zamowienia_w_PC
         {
             nazwa = dane.Substring(0, dane.IndexOf(separator));
             string reszta = dane.Substring(dane.IndexOf(separator)+1);
-            cena = Convert.ToDecimal(reszta.Substring(0, reszta.IndexOf(separator)));
+            cena = Decimal.Parse(reszta.Substring(0, reszta.IndexOf(separator)));
             try
             {
-                ilosc = Convert.ToInt32(reszta.Substring(reszta.IndexOf(separator)+1));
+                ilosc = Int32.Parse(reszta.Substring(reszta.IndexOf(separator)+1));
             }
             catch
             {
                 ilosc = null;
             }
-        }
-        private static StreamReader Czyszczenie_File(StreamReader czyszczenie_zmiennej)
-        {
-            czyszczenie_zmiennej = null;
-            return czyszczenie_zmiennej;
         }
     }
 }
