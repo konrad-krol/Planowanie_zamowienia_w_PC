@@ -50,6 +50,7 @@ namespace Planowanie_zamowienia_w_PC
             Lista_Kolagen.Items.Refresh();
             Lista_Aloes.Items.Refresh();
             Lista_Koszyk.Items.Refresh();
+            Liczba_Produtkow_Do_Dodania.Text = "1";
         }
         private void Przycisk_Rozpocznij_Click(object sender, RoutedEventArgs e)
         {
@@ -78,11 +79,10 @@ namespace Planowanie_zamowienia_w_PC
             else
             {
                 var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)Lista_Suplementy.SelectedItem;
-                Obsluga_Koszyk.Dodaj_Do_Koszyka(pobierz_dane.Key.Nazwa, pobierz_dane.Value.Cena, 
-                    Int32.Parse(Liczba_Produtkow_Do_Dodania.ToString()), pobierz_dane.Value.Pojemnosc);
+                Obsluga_Koszyk.Dodaj_Do_Koszyka(pobierz_dane.Key.Nazwa, pobierz_dane.Value.Cena,
+                    Int32.Parse(Liczba_Produtkow_Do_Dodania.Text.ToString()), pobierz_dane.Value.Pojemnosc);
                 Odswiezanie_List_Produktow();
             }
-            
         }
         private void Przycisk_Wybor_Ekranu_Click(object sender, RoutedEventArgs e)
         {
