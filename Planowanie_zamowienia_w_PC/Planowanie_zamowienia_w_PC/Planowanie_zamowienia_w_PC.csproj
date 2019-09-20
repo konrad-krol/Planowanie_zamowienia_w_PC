@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Baza_Koszyk.cs" />
     <Compile Include="Baza_Produktow.cs" />
+    <Compile Include="Obsluga_Koszyk.cs" />
     <Compile Include="Wczytanie_produktow.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
