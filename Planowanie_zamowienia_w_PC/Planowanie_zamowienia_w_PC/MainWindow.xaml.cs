@@ -73,11 +73,16 @@ namespace Planowanie_zamowienia_w_PC
         }
         private void Przycisk_Dodaj_Do_Koszyka_Click(object sender, RoutedEventArgs e)
         {
-            var sample = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)Lista_Suplementy.SelectedItem;
-            string abc = sample.Key.Nazwa;
-            decimal www = sample.Value.Cena;
-            int? aaa = sample.Value.Ilosc;
-            Odswiezanie_List_Produktow();
+            if (Lista_Suplementy.SelectedItem == null)
+                MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać dodany do koszyka!");
+            else
+            {
+                var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)Lista_Suplementy.SelectedItem;
+                Obsluga_Koszyk.Dodaj_Do_Koszyka(pobierz_dane.Key.Nazwa, pobierz_dane.Value.Cena, 
+                    Int32.Parse(Liczba_Produtkow_Do_Dodania.ToString()), pobierz_dane.Value.Pojemnosc);
+                Odswiezanie_List_Produktow();
+            }
+            
         }
         private void Przycisk_Wybor_Ekranu_Click(object sender, RoutedEventArgs e)
         {
