@@ -20,7 +20,7 @@ namespace Planowanie_zamowienia_w_PC
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private static DataGrid kategoria_zamawianego_produktu;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +41,7 @@ namespace Planowanie_zamowienia_w_PC
             Ekran_Kategoria_Kolagen.Visibility = Visibility.Collapsed;
             Ekran_Kategoria_Kosmetyki.Visibility = Visibility.Collapsed;
             Ekran_Kategoria_Urzadzenia.Visibility = Visibility.Collapsed;
+            Ekran_Obsluga_Zamowienia.Visibility = Visibility.Collapsed;
         }
         private void Odswiezanie_List_Produktow()
         {
@@ -50,7 +51,13 @@ namespace Planowanie_zamowienia_w_PC
             Lista_Kolagen.Items.Refresh();
             Lista_Aloes.Items.Refresh();
             Lista_Koszyk.Items.Refresh();
-            Liczba_Produtkow_Do_Dodania.Text = "1";
+            Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text = "1";
+            Pobierz_Liczba_Produtkow_Do_Dodania_Produkty_W_Koszyku.Text = "1";
+            Tekst_Kwota_Zamowienia_Kategoria_Produktow.Text = string.Format("{0:c}", Obsluga_Koszyk.kwota_zamowienia);
+            Tekst_Kwota_Zamowienia_Obsluga_Zamowienia.Text = string.Format("{0:c}", Obsluga_Koszyk.kwota_zamowienia);
+            Tekst_Kwota_Zamowienia_Produkty_W_Koszyku.Text = string.Format("{0:c}", Obsluga_Koszyk.kwota_zamowienia);
+            Tekst_Liczba_Zamowionych_Produktow_Kategoria_Produktow.Text = Obsluga_Koszyk.liczba_produktow_w_koszyku.ToString();
+            Tekst_Liczba_Zamowionych_Produktow_Obsluga_Zamowienia.Text = Obsluga_Koszyk.liczba_produktow_w_koszyku.ToString();
         }
         private void Przycisk_Rozpocznij_Click(object sender, RoutedEventArgs e)
         {
@@ -74,46 +81,75 @@ namespace Planowanie_zamowienia_w_PC
         }
         private void Przycisk_Dodaj_Do_Koszyka_Click(object sender, RoutedEventArgs e)
         {
-            if (Lista_Suplementy.SelectedItem == null)
+            if (kategoria_zamawianego_produktu.SelectedItem == null)
                 MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać dodany do koszyka!");
             else
             {
-                var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)Lista_Suplementy.SelectedItem;
+                var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)kategoria_zamawianego_produktu.SelectedItem;
                 Obsluga_Koszyk.Dodaj_Do_Koszyka(pobierz_dane.Key.Nazwa, pobierz_dane.Value.Cena,
-                    Int32.Parse(Liczba_Produtkow_Do_Dodania.Text.ToString()), pobierz_dane.Value.Pojemnosc);
+                    Int32.Parse(Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text.ToString().Replace(" ", "")), 
+                    pobierz_dane.Value.Pojemnosc);
                 Odswiezanie_List_Produktow();
             }
         }
         private void Przycisk_Wybor_Ekranu_Click(object sender, RoutedEventArgs e)
         {
             Znikanie_ekranow();
+            Odswiezanie_List_Produktow();
             Button Przycisk = (Button)sender;
             switch (Przycisk.Content.ToString())
             {
                 case "Suplementy diety":
                     Ekran_Kategoria_Suplementy.Visibility = Visibility.Visible;
+                    Ekran_Obsluga_Zamowienia.Visibility = Visibility.Visible;
+                    kategoria_zamawianego_produktu = Lista_Suplementy;
                     break;
                 case "Urządzenia":
                     Ekran_Kategoria_Urzadzenia.Visibility = Visibility.Visible;
+                    Ekran_Obsluga_Zamowienia.Visibility = Visibility.Visible;
+                    kategoria_zamawianego_produktu = Lista_Urzadzenia;
                     break;
                 case "Kosmetyki":
                     Ekran_Kategoria_Kosmetyki.Visibility = Visibility.Visible;
+                    Ekran_Obsluga_Zamowienia.Visibility = Visibility.Visible;
+                    kategoria_zamawianego_produktu = Lista_Kosmetyki;
                     break;
                 case "Aloe Vera Line":
                     Ekran_Kategoria_Aloes.Visibility = Visibility.Visible;
+                    Ekran_Obsluga_Zamowienia.Visibility = Visibility.Visible;
+                    kategoria_zamawianego_produktu = Lista_Aloes;
                     break;
                 case "Kolagen":
                     Ekran_Kategoria_Kolagen.Visibility = Visibility.Visible;
+                    Ekran_Obsluga_Zamowienia.Visibility = Visibility.Visible;
+                    kategoria_zamawianego_produktu = Lista_Kolagen;
                     break;
                 case "Wstecz":
                     Ekran_Kategoria_Produktow.Visibility = Visibility.Visible;
                     break;
                 case "Idź do koszyka":
                     Ekran_Produkty_W_Koszyku.Visibility = Visibility.Visible;
+                    kategoria_zamawianego_produktu = Lista_Koszyk;
                     break;
                 default:
                     MessageBox.Show("Nieznana operacja!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
+            }
+        }
+        private void Blokada_Liter_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || (e.Key <= Key.D9 && e.Key >= Key.D0) ? false : true;
+        }
+
+        private void Przycisk_Usun_Click(object sender, RoutedEventArgs e)
+        {
+            if (kategoria_zamawianego_produktu.SelectedItem == null)
+                MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać dodany do koszyka!");
+            else
+            {
+                var pobierz_dane = (KeyValuePair<Baza_Koszyk.Klucz, Baza_Koszyk.Zawartosc>)kategoria_zamawianego_produktu.SelectedItem;
+                Obsluga_Koszyk.Usuwanie_Z_Koszyka(pobierz_dane.Key);
+                Odswiezanie_List_Produktow();
             }
         }
     }
