@@ -21,14 +21,21 @@
             <Button Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50" Click="Przycisk_Wybor_Ekranu_Click"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Kategoria Produktów" FontSize="24" VerticalAlignment="Top" Margin="486,10,0,0" Height="50" Width="240"/>
             <TextBlock Text="Ilość zamówionych produktów:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="430,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="339"/>
-            <TextBlock Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
+            <TextBlock x:Name="Tekst_Liczba_Zamowionych_Produktow_Kategoria_Produktow" Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
+            <TextBlock x:Name="Tekst_Kwota_Zamowienia_Kategoria_Produktow" Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
         </Grid>
-        <Grid x:Name="Ekran_Kategoria_Suplementy" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
+        <Grid x:Name="Ekran_Obsluga_Zamowienia" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
             <Button Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Wybor_Ekranu_Click"/>
             <Button Content="Dodaj do koszyka" HorizontalAlignment="Left" Height="50" Margin="747,332,0,0" VerticalAlignment="Top" Width="207" FontSize="24" Click="Przycisk_Dodaj_Do_Koszyka_Click"/>
             <TextBlock x:Name="Tekst_Podaj_Liczbe_Produktow" Text="Podaj ilość:" HorizontalAlignment="Left" Height="45" Margin="331,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"/>
-            <TextBox x:Name="Liczba_Produtkow_Do_Dodania" Text="1" TextWrapping="Wrap" Margin="510,335,509.4,168" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
+            <TextBox x:Name="Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia" Text="1" TextWrapping="Wrap" Margin="510,335,509.4,168" FontSize="24" RenderTransformOrigin="0.486,0.502" KeyDown="Blokada_Liter_KeyDown"/>
+            <TextBlock Text="Ilość zamówionych produktów:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="430,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="339"/>
+            <TextBlock x:Name="Tekst_Liczba_Zamowionych_Produktow_Obsluga_Zamowienia" Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
+            <TextBlock x:Name="Tekst_Kwota_Zamowienia_Obsluga_Zamowienia" Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
+            <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="534,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
+            <Button Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50" Click="Przycisk_Wybor_Ekranu_Click"/>
+        </Grid>
+        <Grid x:Name="Ekran_Kategoria_Suplementy" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
             <TextBlock x:Name="Tekt_Kategoria_Suplementy" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Suplementy diety" FontSize="24" VerticalAlignment="Top" Height="38" Width="133" Margin="510,10,0,0"/>
             <DataGrid x:Name="Lista_Suplementy" IsReadOnly="True" ItemsSource="{Binding Baza_Produktow.Suplementy}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="93,76,81,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
                 <DataGrid.Columns>
@@ -37,17 +44,8 @@
                     <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Ilosc}" MinWidth="130"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBlock Text="Ilość zamówionych produktów:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="430,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="339"/>
-            <TextBlock Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="534,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
-            <Button Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50" Click="Przycisk_Wybor_Ekranu_Click"/>
-        </Grid>
+            </Grid>
         <Grid x:Name="Ekran_Kategoria_Kosmetyki" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
-            <Button Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Wybor_Ekranu_Click"/>
-            <Button Content="Dodaj do koszyka" HorizontalAlignment="Left" Height="50" Margin="747,332,0,0" VerticalAlignment="Top" Width="207" FontSize="24" Click="Przycisk_Dodaj_Do_Koszyka_Click"/>
-            <TextBlock Text="Podaj ilość:" HorizontalAlignment="Left" Height="45" Margin="331,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"/>
-            <TextBox Text="1" TextWrapping="Wrap" Margin="510,335,509.4,168" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
             <TextBlock x:Name="Tekt_Kategoria_Kosmetyki" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Kosmetyki" FontSize="24" VerticalAlignment="Top" Height="38" Width="133" Margin="510,10,0,0"/>
             <DataGrid x:Name="Lista_Kosmetyki" IsReadOnly="True" ItemsSource="{Binding Baza_Produktow.Suplementy}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="86,74,88,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
                 <DataGrid.Columns>
@@ -56,17 +54,8 @@
                     <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Ilosc}" MinWidth="130"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBlock Text="Ilość zamówionych produktów:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="430,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="339"/>
-            <TextBlock Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="534,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
-            <Button Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50" Click="Przycisk_Wybor_Ekranu_Click"/>
-        </Grid>
+            </Grid>
         <Grid x:Name="Ekran_Kategoria_Urzadzenia" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
-            <Button Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Wybor_Ekranu_Click"/>
-            <Button Content="Dodaj do koszyka" HorizontalAlignment="Left" Height="50" Margin="747,332,0,0" VerticalAlignment="Top" Width="207" FontSize="24" Click="Przycisk_Dodaj_Do_Koszyka_Click"/>
-            <TextBlock Text="Podaj ilość:" HorizontalAlignment="Left" Height="45" Margin="331,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"/>
-            <TextBox Text="1" TextWrapping="Wrap" Margin="510,335,509.4,168" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
             <TextBlock x:Name="Tekt_Kategoria_Urzadzenia" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Urządzenia" FontSize="24" VerticalAlignment="Top" Height="38" Width="133" Margin="532,10,0,0" RenderTransformOrigin="0.439,-0.558"/>
             <DataGrid x:Name="Lista_Urzadzenia" IsReadOnly="True" ItemsSource="{Binding Baza_Produktow.Suplementy}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="268,74,220,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
                 <DataGrid.Columns>
@@ -74,17 +63,8 @@
                     <DataGridTextColumn Header="Cena" Binding="{Binding Value.Cena}" MinWidth="100" />
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBlock Text="Ilość zamówionych produktów:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="430,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="339"/>
-            <TextBlock Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="534,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
-            <Button Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50" Click="Przycisk_Wybor_Ekranu_Click"/>
-        </Grid>
+            </Grid>
         <Grid x:Name="Ekran_Kategoria_Aloes" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
-            <Button Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Wybor_Ekranu_Click"/>
-            <Button Content="Dodaj do koszyka" HorizontalAlignment="Left" Height="50" Margin="747,332,0,0" VerticalAlignment="Top" Width="207" FontSize="24" Click="Przycisk_Dodaj_Do_Koszyka_Click"/>
-            <TextBlock Text="Podaj ilość:" HorizontalAlignment="Left" Height="45" Margin="331,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"/>
-            <TextBox Text="1" TextWrapping="Wrap" Margin="510,335,509.4,168" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
             <TextBlock x:Name="Tekt_Kategoria_Aloes" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Aloe Vera Line" FontSize="24" VerticalAlignment="Top" Height="38" Width="155" Margin="510,10,0,0"/>
             <DataGrid x:Name="Lista_Aloes" IsReadOnly="True" ItemsSource="{Binding Baza_Produktow.Aloes}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="277,79,220,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
                 <DataGrid.Columns>
@@ -92,17 +72,8 @@
                     <DataGridTextColumn Header="Cena" Binding="{Binding Value.Cena}" MinWidth="100" />
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBlock Text="Ilość zamówionych produktów:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="430,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="339"/>
-            <TextBlock Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="534,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
-            <Button Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50" Click="Przycisk_Wybor_Ekranu_Click"/>
-        </Grid>
+            </Grid>
         <Grid x:Name="Ekran_Kategoria_Kolagen" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
-            <Button Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Wybor_Ekranu_Click"/>
-            <Button Content="Dodaj do koszyka" HorizontalAlignment="Left" Height="50" Margin="747,332,0,0" VerticalAlignment="Top" Width="207" FontSize="24" Click="Przycisk_Dodaj_Do_Koszyka_Click"/>
-            <TextBlock Text="Podaj ilość:" HorizontalAlignment="Left" Height="45" Margin="331,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"/>
-            <TextBox Text="1" TextWrapping="Wrap" Margin="510,335,509.4,168" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
             <TextBlock x:Name="Tekt_Kategoria_Kolagen" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Kolagen" FontSize="24" VerticalAlignment="Top" Height="38" Width="95" Margin="553,10,0,0"/>
             <DataGrid x:Name="Lista_Kolagen" IsReadOnly="True" ItemsSource="{Binding Baza_Produktow.Kolagen}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="84,74,90,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
                 <DataGrid.Columns>
@@ -111,17 +82,12 @@
                     <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Ilosc}" MinWidth="130"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBlock Text="Ilość zamówionych produktów:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="430,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="339"/>
-            <TextBlock Text="0" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="811,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100" RenderTransformOrigin="0.47,0.189"/>
-            <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="534,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
-            <Button Content="Idź do koszyka" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="183" Margin="954,460,0,0" Height="50" Click="Przycisk_Wybor_Ekranu_Click"/>
-        </Grid>
+            </Grid>
         <Grid x:Name="Ekran_Produkty_W_Koszyku" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Collapsed">
-            <TextBlock x:Name="Tekst_Produkty_W_Koszyku" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Produkty w koszyku" VerticalAlignment="Top" Margin="482,10,0,0" Height="37" Width="222" FontSize="24"/>
+            <TextBlock Text="Produkty w koszyku" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="482,10,0,0" Height="37" Width="222" FontSize="24"/>
             <Button Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Wybor_Ekranu_Click"/>
             <TextBlock Text="Podaj ilość:" HorizontalAlignment="Left" Height="50" Margin="72,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"/>
-            <TextBox Text="1" TextWrapping="Wrap" Margin="256,340,763,162" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
+            <TextBox x:Name="Pobierz_Liczba_Produtkow_Do_Dodania_Produkty_W_Koszyku" Text="1" TextWrapping="Wrap" Margin="256,340,763,162" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
             <DataGrid x:Name="Lista_Koszyk" IsReadOnly="True" ItemsSource="{Binding Baza_Koszyk.Koszyk}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="72,71,102,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nazwa produktu" Binding="{Binding Key.Nazwa}" MinWidth="450"/>
@@ -131,9 +97,9 @@
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="544,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
-            <TextBlock Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="803,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100"/>
-            <Button Content="Usuń" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="861,338,0,0" Height="50"/>
-            <Button Content="Przelicz" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="533,338,0,0" Height="50"/>
+            <TextBlock x:Name="Tekst_Kwota_Zamowienia_Produkty_W_Koszyku" Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="803,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100"/>
+            <Button x:Name="Przycisk_Usun" Content="Usuń" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="861,338,0,0" Height="50" Click="Przycisk_Usun_Click"/>
+            <Button x:Name="Przycisk_Przelicz" Content="Przelicz" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="533,338,0,0" Height="50"/>
         </Grid>
     </Grid>
 </Window>
