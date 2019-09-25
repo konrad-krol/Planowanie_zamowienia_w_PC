@@ -29,7 +29,7 @@ namespace Planowanie_zamowienia_w_PC
             Lista_Urzadzenia.ItemsSource = Baza_Produktow.Urzadzenia;
             Lista_Aloes.ItemsSource = Baza_Produktow.Aloes;
             Lista_Kolagen.ItemsSource = Baza_Produktow.Kolagen;
-            Lista_Koszyk.ItemsSource = Baza_Koszyk.Koszyk;
+            Lista_Koszyk.ItemsSource = Baza_Produktow.Koszyk;
         }
         private void Znikanie_ekranow()
         {
@@ -64,7 +64,7 @@ namespace Planowanie_zamowienia_w_PC
             bool potwierdzenie = false;
             try
             {
-                Baza_Koszyk.Koszyk = Baza_Koszyk.Czyszczenie_Koszyka(Baza_Koszyk.Koszyk);
+                Baza_Produktow.Koszyk = Baza_Produktow.Czyszczenie_Koszyk(Baza_Produktow.Koszyk);
                 potwierdzenie = Wczytanie_produktow.Wybor_wczytywanego_produktu(potwierdzenie);
             }
             catch(Exception exception)
@@ -86,10 +86,10 @@ namespace Planowanie_zamowienia_w_PC
             else
             {
                 var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)kategoria_zamawianego_produktu.SelectedItem;
-                Obsluga_Koszyk.Dodaj_Do_Koszyka(pobierz_dane.Key.Nazwa, pobierz_dane.Value.Cena,
-                    Int32.Parse(Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text.ToString().Replace(" ", "")), 
-                    pobierz_dane.Value.Pojemnosc);
+                string ccc = pobierz_dane.Key.Nazwa;
+                Obsluga_Koszyk.Dodaj_Do_Koszyka(pobierz_dane.Key, pobierz_dane.Value, Int32.Parse(Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text.ToString().Replace(" ", "")));
                 Odswiezanie_List_Produktow();
+                Obsluga_Koszyk.Sprawdz_Koszyk(pobierz_dane.Key);
             }
         }
         private void Przycisk_Wybor_Ekranu_Click(object sender, RoutedEventArgs e)
@@ -147,7 +147,7 @@ namespace Planowanie_zamowienia_w_PC
                 MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać dodany do koszyka!");
             else
             {
-                var pobierz_dane = (KeyValuePair<Baza_Koszyk.Klucz, Baza_Koszyk.Zawartosc>)kategoria_zamawianego_produktu.SelectedItem;
+                var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc_Koszyk>)kategoria_zamawianego_produktu.SelectedItem;
                 Obsluga_Koszyk.Usuwanie_Z_Koszyka(pobierz_dane.Key);
                 Odswiezanie_List_Produktow();
             }
