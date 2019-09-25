@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Planowanie_zamowienia_w_PC"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1200">
+        Title="Zamówienia w Perfect-Coll" Height="600" Width="1200">
     <Grid>
         <Grid x:Name="Ekran_Powitalny" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Visibility="Visible" >
             <TextBlock x:Name="Tekst_Witaj" HorizontalAlignment="Left" Height="54" Margin="337,85,0,0" TextWrapping="Wrap" Text="Witaj w programie zamówień PC!" VerticalAlignment="Top" Width="545" FontSize="36"/>
@@ -41,7 +41,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nazwa produktu" Binding="{Binding Key.Nazwa}" MinWidth="450"/>
                     <DataGridTextColumn Header="Cena" Binding="{Binding Value.Cena}" MinWidth="100" />
-                    <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Ilosc}" MinWidth="130"/>
+                    <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Pojemnosc}" MinWidth="130"/>
                 </DataGrid.Columns>
             </DataGrid>
             </Grid>
@@ -51,7 +51,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nazwa produktu" Binding="{Binding Key.Nazwa}" MinWidth="450"/>
                     <DataGridTextColumn Header="Cena" Binding="{Binding Value.Cena}" MinWidth="100" />
-                    <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Ilosc}" MinWidth="130"/>
+                    <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Pojemnosc}" MinWidth="130"/>
                 </DataGrid.Columns>
             </DataGrid>
             </Grid>
@@ -79,7 +79,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nazwa produktu" Binding="{Binding Key.Nazwa}" MinWidth="450"/>
                     <DataGridTextColumn Header="Cena" Binding="{Binding Value.Cena}" MinWidth="100" />
-                    <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Ilosc}" MinWidth="130"/>
+                    <DataGridTextColumn Header="Pojemność" Binding="{Binding Value.Pojemnosc}" MinWidth="130"/>
                 </DataGrid.Columns>
             </DataGrid>
             </Grid>
@@ -88,7 +88,7 @@
             <Button Content="Wstecz" HorizontalAlignment="Left" Height="50" Margin="35,454,0,0" VerticalAlignment="Top" Width="170" FontSize="24" Click="Przycisk_Wybor_Ekranu_Click"/>
             <TextBlock Text="Podaj ilość:" HorizontalAlignment="Left" Height="50" Margin="72,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="24"/>
             <TextBox x:Name="Pobierz_Liczba_Produtkow_Do_Dodania_Produkty_W_Koszyku" Text="1" TextWrapping="Wrap" Margin="256,340,763,162" FontSize="24" RenderTransformOrigin="0.486,0.502"/>
-            <DataGrid x:Name="Lista_Koszyk" IsReadOnly="True" ItemsSource="{Binding Baza_Koszyk.Koszyk}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="72,71,102,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
+            <DataGrid x:Name="Lista_Koszyk" IsReadOnly="True" ItemsSource="{Binding Baza_Produktow.Koszyk}" HorizontalAlignment="Center" Height="220" VerticalAlignment="Top" Margin="72,71,102,0" AutoGenerateColumns="False" FontSize="24" HorizontalContentAlignment="Center">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nazwa produktu" Binding="{Binding Key.Nazwa}" MinWidth="450"/>
                     <DataGridTextColumn Header="Cena" Binding="{Binding Value.Cena}" MinWidth="100" />
