@@ -30,6 +30,7 @@ namespace Planowanie_zamowienia_w_PC
             Lista_Aloes.ItemsSource = Baza_Produktow.Aloes;
             Lista_Kolagen.ItemsSource = Baza_Produktow.Kolagen;
             Lista_Koszyk.ItemsSource = Baza_Produktow.Koszyk;
+            Lista_Promocje.ItemsSource = Baza_Produktow.Promocje;
         }
         private void Znikanie_ekranow()
         {
@@ -42,6 +43,7 @@ namespace Planowanie_zamowienia_w_PC
             Ekran_Kategoria_Kosmetyki.Visibility = Visibility.Collapsed;
             Ekran_Kategoria_Urzadzenia.Visibility = Visibility.Collapsed;
             Ekran_Obsluga_Zamowienia.Visibility = Visibility.Collapsed;
+            Ekran_Kategoria_Promocje.Visibility = Visibility.Collapsed;
         }
         private void Odswiezanie_List_Produktow()
         {
@@ -51,6 +53,7 @@ namespace Planowanie_zamowienia_w_PC
             Lista_Kolagen.Items.Refresh();
             Lista_Aloes.Items.Refresh();
             Lista_Koszyk.Items.Refresh();
+            Lista_Promocje.Items.Refresh();
             Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text = "1";
             Pobierz_Liczba_Produtkow_Do_Dodania_Produkty_W_Koszyku.Text = "1";
             Tekst_Kwota_Zamowienia_Kategoria_Produktow.Text = string.Format("{0:c}", Obsluga_Koszyk.kwota_zamowienia);
@@ -85,11 +88,9 @@ namespace Planowanie_zamowienia_w_PC
                 MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać dodany do koszyka!");
             else
             {
-                var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc>)kategoria_zamawianego_produktu.SelectedItem;
-                string ccc = pobierz_dane.Key.Nazwa;
+                var pobierz_dane = (KeyValuePair<string, Baza_Produktow.Zawartosc>)kategoria_zamawianego_produktu.SelectedItem;
                 Obsluga_Koszyk.Dodaj_Do_Koszyka(pobierz_dane.Key, pobierz_dane.Value, Int32.Parse(Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text.ToString().Replace(" ", "")));
                 Odswiezanie_List_Produktow();
-                Obsluga_Koszyk.Sprawdz_Koszyk(pobierz_dane.Key);
             }
         }
         private void Przycisk_Wybor_Ekranu_Click(object sender, RoutedEventArgs e)
@@ -124,6 +125,11 @@ namespace Planowanie_zamowienia_w_PC
                     Ekran_Obsluga_Zamowienia.Visibility = Visibility.Visible;
                     kategoria_zamawianego_produktu = Lista_Kolagen;
                     break;
+                case "Promocje":
+                    Ekran_Kategoria_Promocje.Visibility = Visibility.Visible;
+                    Ekran_Obsluga_Zamowienia.Visibility = Visibility.Visible;
+                    kategoria_zamawianego_produktu = Lista_Promocje;
+                    break;
                 case "Wstecz":
                     Ekran_Kategoria_Produktow.Visibility = Visibility.Visible;
                     break;
@@ -147,7 +153,7 @@ namespace Planowanie_zamowienia_w_PC
                 MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać dodany do koszyka!");
             else
             {
-                var pobierz_dane = (KeyValuePair<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc_Koszyk>)kategoria_zamawianego_produktu.SelectedItem;
+                var pobierz_dane = (KeyValuePair<string, Baza_Produktow.Zawartosc_Koszyk>)kategoria_zamawianego_produktu.SelectedItem;
                 Obsluga_Koszyk.Usuwanie_Z_Koszyka(pobierz_dane.Key);
                 Odswiezanie_List_Produktow();
             }
