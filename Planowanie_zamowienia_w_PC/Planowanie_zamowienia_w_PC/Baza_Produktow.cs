@@ -8,31 +8,24 @@ namespace Planowanie_zamowienia_w_PC
 {
     class Baza_Produktow
     {
-        public static Dictionary<Klucz, Zawartosc> Suplementy = new Dictionary<Klucz, Zawartosc>();
-        public static Dictionary<Klucz, Zawartosc> Kosmetyki = new Dictionary<Klucz, Zawartosc>();
-        public static Dictionary<Klucz, Zawartosc> Urzadzenia = new Dictionary<Klucz, Zawartosc>();
-        public static Dictionary<Klucz, Zawartosc> Aloes = new Dictionary<Klucz, Zawartosc>();
-        public static Dictionary<Klucz, Zawartosc> Kolagen = new Dictionary<Klucz, Zawartosc>();
+        public static Dictionary<string, Zawartosc> Suplementy = new Dictionary<string, Zawartosc>();
+        public static Dictionary<string, Zawartosc> Kosmetyki = new Dictionary<string, Zawartosc>();
+        public static Dictionary<string, Zawartosc> Urzadzenia = new Dictionary<string, Zawartosc>();
+        public static Dictionary<string, Zawartosc> Aloes = new Dictionary<string, Zawartosc>();
+        public static Dictionary<string, Zawartosc> Kolagen = new Dictionary<string, Zawartosc>();
+        public static Dictionary<string, Zawartosc> Promocje = new Dictionary<string, Zawartosc>();
 
-        public static Dictionary<Klucz, Zawartosc_Koszyk> Koszyk = new Dictionary<Klucz, Zawartosc_Koszyk>();
+        public static Dictionary<string, Zawartosc_Koszyk> Koszyk = new Dictionary<string, Zawartosc_Koszyk>();
 
-        public static Dictionary<Klucz, Zawartosc> Czyszczenie_Produktow(Dictionary<Klucz, Zawartosc> slownik)
+        public static Dictionary<string, Zawartosc> Czyszczenie_Produktow(Dictionary<string, Zawartosc> slownik)
         {
             slownik.Clear();
             return slownik;
         }
-        public static Dictionary<Klucz, Zawartosc_Koszyk> Czyszczenie_Koszyk(Dictionary<Klucz, Zawartosc_Koszyk> slownik)
+        public static Dictionary<string, Zawartosc_Koszyk> Czyszczenie_Koszyk(Dictionary<string, Zawartosc_Koszyk> slownik)
         {
             slownik.Clear();
             return slownik;
-        }
-        public class Klucz
-        {
-            public string Nazwa { get; set; }
-            public Klucz(string okNazwa)
-            {
-                Nazwa = okNazwa;
-            }
         }
         public class Zawartosc
         {
@@ -49,11 +42,13 @@ namespace Planowanie_zamowienia_w_PC
             public decimal Cena { get; set; }
             public int Ilosc { get; set; }
             public int? Pojemnosc { get; set; }
-            public Zawartosc_Koszyk(decimal okCena, int okIlosc, int? okPojemnosc)
+            public decimal Cena_Jednego { get; set; }
+            public Zawartosc_Koszyk(decimal okCena, int okIlosc, int? okPojemnosc, decimal okCena_Jednego)
             {
                 Cena = okCena;
                 Ilosc = okIlosc;
                 Pojemnosc = okPojemnosc;
+                Cena_Jednego = okCena_Jednego;
             }
         }
 
