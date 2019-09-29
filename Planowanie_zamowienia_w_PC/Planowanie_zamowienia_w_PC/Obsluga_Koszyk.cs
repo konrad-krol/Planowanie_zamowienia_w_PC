@@ -15,36 +15,34 @@ namespace Planowanie_zamowienia_w_PC
         public static decimal kwota_zamowienia = 0.00M;
         public static int liczba_produktow_w_koszyku = 0;
 
-        public static void Dodaj_Do_Koszyka(Baza_Produktow.Klucz klucz, Baza_Produktow.Zawartosc zawartosc, int ilosc)
+        public static void Dodaj_Do_Koszyka(string klucz, Baza_Produktow.Zawartosc zawartosc, int ilosc)
         {
-            /*decimal abc = 1234;
-            Baza_Produktow.Koszyk.Add(new Baza_Produktow.Klucz(klucz.Nazwa), new Baza_Produktow.Zawartosc_Koszyk(abc, ilosc, zawartosc.Pojemnosc));
-
-            Baza_Produktow.Koszyk.TryGetValue(klucz, out var pobierz_dane);
-            int? kkk = pobierz_dane.Ilosc;*/
-            bool abc = Sprawdz_Koszyk(klucz);
-            decimal cena_produktow = ilosc*zawartosc.Cena;
-            kwota_zamowienia += cena_produktow;
-            liczba_produktow_w_koszyku += ilosc;
-            Baza_Produktow.Koszyk.Add(new Baza_Produktow.Klucz(klucz.Nazwa), new Baza_Produktow.Zawartosc_Koszyk(cena_produktow, ilosc, zawartosc.Pojemnosc));
-            
-        }
-        public static bool Sprawdz_Koszyk(Baza_Produktow.Klucz klucz)
-        {
-            Baza_Produktow.Klucz abc = klucz;
-            if (Baza_Produktow.Koszyk.ContainsKey(abc))
-                return false;
+            decimal cena_produktow = ilosc * zawartosc.Cena;
+            if(Baza_Produktow.Koszyk.ContainsKey(klucz))
+            {
+                Edytuj_Koszyk(klucz, ilosc, ref Baza_Produktow.Koszyk, ref liczba_produktow_w_koszyku, ref kwota_zamowienia);
+            }
             else
-                return true;
+            {
+                Baza_Produktow.Koszyk.Add(klucz, new Baza_Produktow.Zawartosc_Koszyk(cena_produktow, ilosc, zawartosc.Pojemnosc, zawartosc.Cena));
+                kwota_zamowienia += cena_produktow;
+                liczba_produktow_w_koszyku += ilosc;
+            }
+        }
+        public static void Edytuj_Koszyk(string klucz, int ilosc_dodaj, ref Dictionary<string, Baza_Produktow.Zawartosc_Koszyk> koszyk, 
+            ref int ilosc_produktow_w_koszyku, ref decimal wartosc_zamowienia)
+        {
+            koszyk.TryGetValue(klucz, out Baza_Produktow.Zawartosc_Koszyk zawartosc);
+            ilosc_produktow_w_koszyku += ilosc_dodaj;
+            wartosc_zamowienia += zawartosc.Cena_Jednego * ilosc_dodaj;
+            koszyk[klucz] = new Baza_Produktow.Zawartosc_Koszyk(zawartosc.Cena + ilosc_dodaj * zawartosc.Cena_Jednego, ilosc_dodaj + zawartosc.Ilosc, zawartosc.Pojemnosc, zawartosc.Cena_Jednego);
 
         }
-        public static void Usuwanie_Z_Koszyka(Baza_Produktow.Klucz klucz)
+        public static void Usuwanie_Z_Koszyka(string klucz)
         {
             Baza_Produktow.Koszyk.TryGetValue(klucz, out var pobierz_dane);
-            decimal cena = pobierz_dane.Cena;
-            int ilosc = pobierz_dane.Ilosc;
-            kwota_zamowienia -= cena;
-            liczba_produktow_w_koszyku -= ilosc;
+            kwota_zamowienia -= pobierz_dane.Cena;
+            liczba_produktow_w_koszyku -= pobierz_dane.Ilosc;
             Baza_Produktow.Koszyk.Remove(klucz);
         }
     }
