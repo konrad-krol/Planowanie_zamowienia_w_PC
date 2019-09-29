@@ -19,10 +19,11 @@ namespace Planowanie_zamowienia_w_PC
         private static string sciezka_produkty_kolagenowe = @"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\PRODUKTY_KOLAGENOWE.txt";
         private static string sciezka_kolagen_grafit_srebro_platyna = @"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\KOLAGEN_GRAFIT_SREBRO_PLATYNA.txt";
         private static string sciezka_aloe_vera_line = @"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\ALOE_VERA_LINE.txt";
+        private static string sciezka_promocje = @"C:\Projekty\Planowanie_zamowienia_w_PC\Planowanie_zamowienia_w_PC\Spis_produktow\PROMOCJE.txt";
 
         public static bool Wybor_wczytywanego_produktu(bool potwierdzenie)
         {
-            string[] spis = { "aloes", "kolagen", "kosmetyki", "suplementy", "urzadzenia", "true" };
+            string[] spis = { "aloes", "kolagen", "kosmetyki", "suplementy", "urzadzenia", "promocje", "true" };
             foreach(string wybor in spis)
             {
                 potwierdzenie = Spis_Produktow(potwierdzenie, wybor);
@@ -58,6 +59,11 @@ namespace Planowanie_zamowienia_w_PC
                     Baza_Produktow.Urzadzenia = Baza_Produktow.Czyszczenie_Produktow(Baza_Produktow.Urzadzenia);
                     Baza_Produktow.Urzadzenia = Wczytaj_produkty(Baza_Produktow.Urzadzenia, tablica_sciezka_urzadzenia);
                     break;
+                case "promocje":
+                    string[] tablica_sciezka_promocje = { sciezka_promocje };
+                    Baza_Produktow.Promocje = Baza_Produktow.Czyszczenie_Produktow(Baza_Produktow.Promocje);
+                    Baza_Produktow.Promocje = Wczytaj_produkty(Baza_Produktow.Promocje, tablica_sciezka_promocje);
+                    break;
                 case "true":
                     potwierdzenie = true;
                     break;
@@ -67,7 +73,7 @@ namespace Planowanie_zamowienia_w_PC
             }
             return potwierdzenie;
         }
-        private static Dictionary<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc> Wczytaj_produkty(Dictionary<Baza_Produktow.Klucz, Baza_Produktow.Zawartosc> slownik, string[] sciezka)
+        private static Dictionary<string, Baza_Produktow.Zawartosc> Wczytaj_produkty(Dictionary<string, Baza_Produktow.Zawartosc> slownik, string[] sciezka)
         {
             string pobierz = "";
             string dane = "";
@@ -79,7 +85,7 @@ namespace Planowanie_zamowienia_w_PC
                 while ((pobierz = file.ReadLine()) != null)
                 {
                     Pobieranie(pobierz, out dane, out cena, out pojemnosc);      
-                    slownik.Add(new Baza_Produktow.Klucz(dane), new Baza_Produktow.Zawartosc(cena, pojemnosc));        
+                    slownik.Add(dane, new Baza_Produktow.Zawartosc(cena, pojemnosc));        
                 }
                 file.Close();
                 file = null;
