@@ -51,7 +51,6 @@ namespace Planowanie_zamowienia_w_PC
                 Cena_Jednego = okCena_Jednego;
             }
         }
-
-
+        
     }
 }
