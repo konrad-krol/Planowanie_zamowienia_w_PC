@@ -84,6 +84,8 @@ namespace Planowanie_zamowienia_w_PC
         }
         private void Przycisk_Dodaj_Do_Koszyka_Click(object sender, RoutedEventArgs e)
         {
+            if (Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text == "")
+                Pobierz_Liczba_Produtkow_Do_Dodania_Obsluga_Zamowienia.Text = "1";
             if (kategoria_zamawianego_produktu.SelectedItem == null)
                 MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać dodany do koszyka!");
             else
@@ -146,7 +148,6 @@ namespace Planowanie_zamowienia_w_PC
         {
             e.Handled = (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || (e.Key <= Key.D9 && e.Key >= Key.D0) ? false : true;
         }
-
         private void Przycisk_Usun_Click(object sender, RoutedEventArgs e)
         {
             if (kategoria_zamawianego_produktu.SelectedItem == null)
@@ -155,6 +156,21 @@ namespace Planowanie_zamowienia_w_PC
             {
                 var pobierz_dane = (KeyValuePair<string, Baza_Produktow.Zawartosc_Koszyk>)kategoria_zamawianego_produktu.SelectedItem;
                 Obsluga_Koszyk.Usuwanie_Z_Koszyka(pobierz_dane.Key);
+                Odswiezanie_List_Produktow();
+            }
+        }
+        private void Przycisk_Przelicz_Click(object sender, RoutedEventArgs e)
+        {
+            if (Pobierz_Liczba_Produtkow_Do_Dodania_Produkty_W_Koszyku.Text == "")
+                Pobierz_Liczba_Produtkow_Do_Dodania_Produkty_W_Koszyku.Text = "1";
+            if (kategoria_zamawianego_produktu.SelectedItem == null)
+                MessageBox.Show("Brak zaznaczonego Produktu! \nProszę zaznaczyć produkt, który ma zostać edytowany!");
+            else
+            {
+                var pobierz_dane = (KeyValuePair<string, Baza_Produktow.Zawartosc_Koszyk>)Lista_Koszyk.SelectedItem;
+                Obsluga_Koszyk.Edytuj_Koszyk(pobierz_dane.Key, 
+                    Int32.Parse(Pobierz_Liczba_Produtkow_Do_Dodania_Produkty_W_Koszyku.Text.ToString().Replace(" ", "")), 
+                    ref Baza_Produktow.Koszyk, ref Obsluga_Koszyk.liczba_produktow_w_koszyku, ref Obsluga_Koszyk.kwota_zamowienia, true);
                 Odswiezanie_List_Produktow();
             }
         }
