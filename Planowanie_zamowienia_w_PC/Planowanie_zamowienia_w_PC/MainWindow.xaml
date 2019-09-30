@@ -110,7 +110,7 @@
             <TextBlock Text="Wartość zamówienia:" HorizontalAlignment="Left" FontSize="24" Height="35" Margin="544,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
             <TextBlock x:Name="Tekst_Kwota_Zamowienia_Produkty_W_Koszyku" Text="0,00" HorizontalAlignment="Left" Height="35" FontSize="24" Margin="803,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="100"/>
             <Button x:Name="Przycisk_Usun" Content="Usuń" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="861,338,0,0" Height="50" Click="Przycisk_Usun_Click"/>
-            <Button x:Name="Przycisk_Przelicz" Content="Przelicz" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="533,338,0,0" Height="50"/>
+            <Button x:Name="Przycisk_Przelicz" Content="Przelicz" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="533,338,0,0" Height="50" Click="Przycisk_Przelicz_Click"/>
         </Grid>
     </Grid>
 </Window>
