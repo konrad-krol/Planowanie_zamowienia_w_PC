@@ -75,12 +75,12 @@ namespace Planowanie_zamowienia_w_PC
         }
         private static Dictionary<string, Baza_Produktow.Zawartosc> Wczytaj_produkty(Dictionary<string, Baza_Produktow.Zawartosc> slownik, string[] sciezka)
         {
-            string pobierz = "";
-            string dane = "";
-            decimal cena = 0.00M;
-            int? pojemnosc = null;
             foreach(string wybierz in sciezka)
             {
+                string pobierz = "";
+                string dane = "";
+                decimal cena = 0.00M;
+                int? pojemnosc = null;
                 StreamReader file = new StreamReader(wybierz, Encoding.UTF8);
                 while ((pobierz = file.ReadLine()) != null)
                 {
@@ -88,7 +88,6 @@ namespace Planowanie_zamowienia_w_PC
                     slownik.Add(dane, new Baza_Produktow.Zawartosc(cena, pojemnosc));        
                 }
                 file.Close();
-                file = null;
             }
             return slownik;
         }
