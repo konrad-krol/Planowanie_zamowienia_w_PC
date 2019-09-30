@@ -20,7 +20,7 @@ namespace Planowanie_zamowienia_w_PC
             decimal cena_produktow = ilosc * zawartosc.Cena;
             if(Baza_Produktow.Koszyk.ContainsKey(klucz))
             {
-                Edytuj_Koszyk(klucz, ilosc, ref Baza_Produktow.Koszyk, ref liczba_produktow_w_koszyku, ref kwota_zamowienia);
+                Edytuj_Koszyk(klucz, ilosc, ref Baza_Produktow.Koszyk, ref liczba_produktow_w_koszyku, ref kwota_zamowienia, false);
             }
             else
             {
@@ -30,12 +30,26 @@ namespace Planowanie_zamowienia_w_PC
             }
         }
         public static void Edytuj_Koszyk(string klucz, int ilosc_dodaj, ref Dictionary<string, Baza_Produktow.Zawartosc_Koszyk> koszyk, 
-            ref int ilosc_produktow_w_koszyku, ref decimal wartosc_zamowienia)
+            ref int ilosc_produktow_w_koszyku, ref decimal wartosc_zamowienia, bool ekran_koszyk)
         {
             koszyk.TryGetValue(klucz, out Baza_Produktow.Zawartosc_Koszyk zawartosc);
-            ilosc_produktow_w_koszyku += ilosc_dodaj;
-            wartosc_zamowienia += zawartosc.Cena_Jednego * ilosc_dodaj;
-            koszyk[klucz] = new Baza_Produktow.Zawartosc_Koszyk(zawartosc.Cena + ilosc_dodaj * zawartosc.Cena_Jednego, ilosc_dodaj + zawartosc.Ilosc, zawartosc.Pojemnosc, zawartosc.Cena_Jednego);
+            if(ekran_koszyk)
+            {
+                ilosc_produktow_w_koszyku -= zawartosc.Ilosc;
+                ilosc_produktow_w_koszyku += ilosc_dodaj;
+                wartosc_zamowienia -= zawartosc.Cena;
+                wartosc_zamowienia += ilosc_dodaj * zawartosc.Cena_Jednego;
+                koszyk[klucz] = new Baza_Produktow.Zawartosc_Koszyk(ilosc_dodaj * zawartosc.Cena_Jednego,
+                    ilosc_dodaj, zawartosc.Pojemnosc, zawartosc.Cena_Jednego);
+            }
+            else
+            {
+                ilosc_produktow_w_koszyku += ilosc_dodaj;
+                wartosc_zamowienia += zawartosc.Cena_Jednego * ilosc_dodaj;
+                koszyk[klucz] = new Baza_Produktow.Zawartosc_Koszyk(zawartosc.Cena + ilosc_dodaj * zawartosc.Cena_Jednego, 
+                    ilosc_dodaj + zawartosc.Ilosc, zawartosc.Pojemnosc, zawartosc.Cena_Jednego);
+            }
+
 
         }
         public static void Usuwanie_Z_Koszyka(string klucz)
